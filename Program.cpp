@@ -14,7 +14,7 @@ void run_experiments(int, const Vector<int>&); // Runs the experiments for the s
 
 int main() {
     // Create a Sorting object
-    Vector<int> vec = Sorting::generate_vector(20, 0, 99);
+    Vector<int> vec = Sorting<int>::generate_vector(20, 0, 99);
 
     int choice;
     while(true) {
@@ -31,14 +31,14 @@ int main() {
         }
 
         if (choice == 0) { break; }
-        if (choice > 0 && choice < 13) {
+        if (choice > 0 && choice < 12) {
             cout << "\nOriginal vector: " << vec << endl;
             experiment(choice, vec);
-        } else if (choice == 13) {
+        } else if (choice == 12) {
             run_experiments(choice, vec);
-        } else if (choice == 14) {
+        } else if (choice == 13) {
             cout << "Generating a new vector..." << endl;
-            vec = Sorting::generate_vector(20, 0, 99);
+            vec = Sorting<int>::generate_vector(20, 0, 99);
             cout << "New vector generated: " << vec << endl;
         } else {
             cout << "Invalid choice. Please try again." << endl;
@@ -78,8 +78,6 @@ const string sorting_name(int choice) {
             return "Bucket Sort";
         case 11:
             return "Tim Sort";
-        case 12:
-            return "Intro Sort";
         default:
             return "Unknown";
     }
@@ -89,14 +87,11 @@ const string sorting_name(int choice) {
 */
 void display_menu() {
     cout << "Sorting Algorithms Menu:" << endl;
-    for (size_t i = 1; i < 13; ++i) {
+    for (size_t i = 1; i < 12; ++i) {
         cout << setw(2) << i << ". " << sorting_name(i) << endl;
-        if (i > 2) {
-            cout << "   (Not implemented yet)" << endl;
-        }
     }
-    cout << "13. Run experiments for all sorting algorithms" << endl;
-    cout << "14. Generate a new vector" << endl;
+    cout << "12. Run experiments for all sorting algorithms" << endl;
+    cout << "13. Generate a new vector" << endl;
     cout << " 0. Exit" << endl;
     cout << "Choose: ";
 } // Time complexity: O(1), Space complexity: O(1)
@@ -122,40 +117,37 @@ bool is_sorted(const Vector<int>& vector) {
 bool apply_sort(int choice, Vector<int>& vec) {
     switch (choice) {
         case 1:
-            Sorting::bubble_sort(vec);
+            Sorting<int>::bubble_sort(vec);
             break;
         case 2:
-            Sorting::selection_sort(vec);
+            Sorting<int>::selection_sort(vec);
             break;
         case 3:
-            Sorting::insertion_sort(vec);
+            Sorting<int>::insertion_sort(vec);
             break;
         case 4:
-            Sorting::shell_sort(vec);
+            Sorting<int>::shell_sort(vec);
             break;
         case 5:
-            Sorting::merge_sort(vec);
+            Sorting<int>::merge_sort(vec);
             break;
         case 6:
-            Sorting::quick_sort(vec);
+            Sorting<int>::quick_sort(vec);
             break;
         case 7:
-            Sorting::heap_sort(vec);
+            Sorting<int>::heap_sort(vec);
             break;
         case 8:
-            Sorting::counting_sort(vec);
+            Sorting<int>::counting_sort(vec);
             break;
         case 9:
-            Sorting::radix_sort(vec);
+            Sorting<int>::radix_sort(vec);
             break;
         case 10:
-            Sorting::bucket_sort(vec);
+            Sorting<int>::bucket_sort(vec);
             break;
         case 11:
-            Sorting::tim_sort(vec);
-            break;
-        case 12:
-            Sorting::intro_sort(vec);
+            Sorting<int>::tim_sort(vec);
             break;
         default:
             return false; // Invalid choice
@@ -168,7 +160,7 @@ bool apply_sort(int choice, Vector<int>& vec) {
     @param original_vec: the original vector to sort
 */
 void experiment(int choice, const Vector<int>& original_vec) {
-    if (choice < 1 || choice > 12) {
+    if (choice < 1 || choice > 11) {
         cout << "Invalid choice for experiment." << endl;
         return;
     }
